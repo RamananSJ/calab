@@ -1,0 +1,55 @@
+#Regression coefficient not there 
+#without dataset
+import numpy as np
+
+# Given data
+x = [[1,4],[2,5],[3,8],[4,2]]
+y = [1,6,8,12]
+x = np.array(x)
+# Add a column of ones to the input data
+x = np.array(np.insert(x,0,1,axis=1))
+
+# Transpose of x
+x_transpose = np.transpose(x)
+
+# Matrix multiplication for x_transpose and x
+x_transpose_x = np.dot(x_transpose, x)
+
+# Inverse of x_transpose_x
+x_transpose_x_inv = np.linalg.inv(x_transpose_x)
+
+# Matrix multiplication for (x_transpose_x)^(-1) and x_transpose
+x_product = np.dot(x_transpose_x_inv, x_transpose)
+
+# Matrix multiplication for x_product and y
+A = np.dot(x_product, y)
+
+# Predicted y values
+#y_pred = np.dot(x, A)
+
+# Calculate Correlation Coefficient
+#correlation_coefficient = np.corrcoef(y, y_pred)[0, 1]
+#print(np.square(correlation_coefficient)) #This is the coefficient of determination
+print("Coefficients:", A)
+#print("Correlation Coefficient:", correlation_coefficient)
+
+#with dataset
+import numpy as np
+import pandas as pd
+data = pd.read_csv('./Data.csv')
+x = data[['x0','x1']].values.tolist()
+y = data[['y']].values.tolist()
+print(x)
+print(y)
+x = np.array(np.insert(x,0,1,axis=1))
+print(x)
+x_tr = np.transpose(x)
+print(x_tr)
+x_tr_x = np.dot(x_tr,x)
+print(x_tr_x)
+x_tr_x_inv = np.array(np.linalg.inv(x_tr_x))
+print(x_tr_x_inv)
+x_pr = np.dot(x_tr_x_inv,x_tr)
+print(x_pr)
+a = np.array(np.dot(x_pr,y))
+print(a)

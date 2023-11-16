@@ -21,7 +21,11 @@ import matplotlib.pyplot as plt
 from scipy import stats
 import numpy as np
 import pandas as pd
-
+data = pd.read_csv('simple.csv')
+x = data['x'].values.tolist()
+y = data['y'].values.tolist()
+x = np.array(x)
+y=np.array(y)
 slope, intercept, r, p, std_err = stats.linregress(x, y)
 print(slope)
 print(intercept)

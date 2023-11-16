@@ -1,0 +1,71 @@
+#without dataset
+import numpy as np
+
+# Given data
+x = [1,2,3,4]
+y = [1,3,4,8]
+x = np.array(x)
+
+# Add a column of ones to the input data
+x = np.array(np.column_stack((np.ones_like(x),x)))
+
+# Transpose of x
+x_transpose = np.transpose(x)
+
+# Matrix multiplication for x_transpose and x
+x_transpose_x = np.dot(x_transpose, x)
+
+# Inverse of x_transpose_x
+x_transpose_x_inv = np.linalg.inv(x_transpose_x)
+
+# Matrix multiplication for (x_transpose_x)^(-1) and x_transpose
+x_product = np.dot(x_transpose_x_inv, x_transpose)
+
+# Matrix multiplication for x_product and y
+A = np.dot(x_product, y)
+
+# Predicted y values
+y_pred = np.dot(x, A)
+
+# Calculate Correlation Coefficient
+correlation_coefficient = np.corrcoef(y, y_pred)[0, 1]
+print(np.square(correlation_coefficient)) #This is the coefficient of determination
+print("Coefficients:", A)
+print("Correlation Coefficient:", correlation_coefficient)
+
+#with dataset
+import numpy as np
+import pandas as pd
+# Given data
+data = pd.read_csv('simple.csv')
+x = data['x'].values.tolist()
+y = data['y'].values.tolist()
+x = np.array(x)
+y=np.array(y)
+
+# Add a column of ones to the input data
+x = np.array(np.column_stack((np.ones_like(x),x)))
+
+# Transpose of x
+x_transpose = np.transpose(x)
+
+# Matrix multiplication for x_transpose and x
+x_transpose_x = np.dot(x_transpose, x)
+
+# Inverse of x_transpose_x
+x_transpose_x_inv = np.linalg.inv(x_transpose_x)
+
+# Matrix multiplication for (x_transpose_x)^(-1) and x_transpose
+x_product = np.dot(x_transpose_x_inv, x_transpose)
+
+# Matrix multiplication for x_product and y
+A = np.dot(x_product, y)
+
+# Predicted y values
+y_pred = np.dot(x, A)
+
+# Calculate Correlation Coefficient
+correlation_coefficient = np.corrcoef(y, y_pred)[0, 1]
+print(np.square(correlation_coefficient)) #This is the coefficient of determination
+print("Coefficients:", A)
+print("Correlation Coefficient:", correlation_coefficient)
